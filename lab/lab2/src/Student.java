@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Student {
+public class Student {
     private Long id;
     private String name;
 
@@ -28,9 +28,7 @@ class Student {
     public int hashCode() {
         return Objects.hash(id);
     }
-}
 
-public class Main {
     public static void main(String[] args) {
         final int SIZE = 10000000;
         System.out.println("Тестирование для " + SIZE + " объектов");
