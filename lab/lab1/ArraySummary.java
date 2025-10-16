@@ -5,11 +5,12 @@
 import java.util.Scanner;
 public class ArraySummary {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] arr = ArrayUtil.inputArray(scanner);
+        int size = ArrayUtil.sizeArray();
+        int[] arr = ArrayUtil.inputArray(size);
 
         System.out.println("Массив:");
         ArrayUtil.printArray(arr);
+        System.out.println(" ");
 
         int result = summaryOfTwoSmallest(arr);
         if (result == -1) {

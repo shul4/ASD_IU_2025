@@ -5,52 +5,56 @@
 Пример, [1, 2, 3, 4] * [1, 1] = [1, 3, 5, 7, 4].
 Результат – число, представленное массивом.
 */
-import java.util.Scanner;
 public class ArrayMultiply {
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Первый массив:");
+        int firstSize = ArrayUtil.sizeArray();
+        int[] firstArray = ArrayUtil.inputArray(firstSize);
 
-        System.out.print("Введите первое число: ");
-        String firstString = scanner.next();
-        System.out.print("Введите второе число: ");
-        String secondString = scanner.next();
+        System.out.println("Второй массив:");
+        int secondSize = ArrayUtil.sizeArray();
+        int[] secondArray = ArrayUtil.inputArray(secondSize);
 
-        int[] firstNumber = stringIntoArray(firstString);
-        int[] secondNumber = stringIntoArray(secondString);
+        int[] result = multiplyArrays(firstArray, secondArray);
 
-        long firstLong = Long.parseLong(firstString);
-        long secondLong = Long.parseLong(secondString);
-        long result = firstLong * secondLong;
-
-        int[] resultArray = numberIntoArray(result);
-
-        printArray(firstNumber);
+        ArrayUtil.printArray(firstArray);
         System.out.print(" * ");
-        printArray(secondNumber);
+        ArrayUtil.printArray(secondArray);
         System.out.print(" = ");
-        printArray(resultArray);
+        ArrayUtil.printArray(result);
+    }
 
-    }
-    private static int[] stringIntoArray(String number) {
-        int n = number.length();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = number.charAt(i) - '0';
+    public static int arrayNumber(int[] numberArray) {
+        int number = 0;
+        for (int i = 0; i < numberArray.length; i++) {
+            number = number * 10 + numberArray[i];
         }
-        return arr;
+        return number;
     }
-    private static int[] numberIntoArray(long number) {
-        String str = String.valueOf(number);
-        return stringIntoArray(str);
-    }
-    private static void printArray(int[] arr) {
-        System.out.print("[");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
-            if (i < arr.length - 1) {
-                System.out.print(", ");
-            }
+    public static int[] numberToArray(long number) {
+        if (number == 0) {
+            return new int[]{0};
         }
-        System.out.print("]");
+        long temp = number;
+        int count = 0;
+        while (temp > 0) {
+            temp = temp / 10;
+            count++;
+        }
+        int[] digits = new int[count];
+        temp = number;
+        for (int i = count - 1; i >= 0; i--) {
+            digits[i] = (int) (temp % 10);
+            temp = temp / 10;
+        }
+        return digits;
+    }
+
+    public static int[] multiplyArrays(int[] firstArray, int[] secondArray) {
+        int firstNumber = arrayNumber(firstArray);
+        int secondNumber = arrayNumber(secondArray);
+        long result = (long) firstNumber * secondNumber;
+        return numberToArray(result);
     }
 }
+

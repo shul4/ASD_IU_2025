@@ -5,14 +5,20 @@ import java.util.Scanner;
 public class BinarySearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int size = ArrayUtil.sizeArray();
+        int[] array = ArrayUtil.inputArray(size);
+        System.out.println("Исходный массив:");
+        ArrayUtil.printArray(array);
+        System.out.println(" ");
 
-        int[] array = ArrayUtil.inputArray(scanner);
+        ArrayUtil.bubbleSort(array);
+
+        System.out.println("Отсортированный массив:");
+        ArrayUtil.printArray(array);
+        System.out.println(" ");
 
         System.out.print("Введите число для поиска: ");
         int target = scanner.nextInt();
-
-        System.out.println("Исходный массив:");
-        ArrayUtil.printArray(array);
 
         int iterativeResult = binarySearchIterative(array, target);
         if (iterativeResult == -1) {
@@ -48,7 +54,6 @@ public class BinarySearch {
             return -1;
         }
         int middle = (left + right) / 2;
-
         if (arr[middle] == target) {
             return middle;
         } else if (arr[middle] < target) {

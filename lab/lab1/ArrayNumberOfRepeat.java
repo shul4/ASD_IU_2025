@@ -7,10 +7,12 @@ public class ArrayNumberOfRepeat {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] array = ArrayUtil.inputArray(scanner);
+        int size = ArrayUtil.sizeArray();
+        int[] array = ArrayUtil.inputArray(size);
 
         System.out.println("Исходный массив:");
         ArrayUtil.printArray(array);
+        System.out.println(" ");
 
         int answer = findNumber(array);
         System.out.println("Результат: " + answer);
