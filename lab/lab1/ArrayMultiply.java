@@ -5,15 +5,17 @@
 Пример, [1, 2, 3, 4] * [1, 1] = [1, 3, 5, 7, 4].
 Результат – число, представленное массивом.
 */
+import java.util.Scanner;
 public class ArrayMultiply {
     public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Первый массив:");
-        int firstSize = ArrayUtil.sizeArray();
-        int[] firstArray = ArrayUtil.inputArray(firstSize);
+        int firstSize = ArrayUtil.sizeArray(scanner);
+        int[] firstArray = ArrayUtil.inputArray(scanner, firstSize);
 
         System.out.println("Второй массив:");
-        int secondSize = ArrayUtil.sizeArray();
-        int[] secondArray = ArrayUtil.inputArray(secondSize);
+        int secondSize = ArrayUtil.sizeArray(scanner);
+        int[] secondArray = ArrayUtil.inputArray(scanner, secondSize);
 
         int[] result = multiplyArrays(firstArray, secondArray);
 

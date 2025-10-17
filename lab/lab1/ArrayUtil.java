@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class ArrayUtil {
     public static int sizeArray() {
         Scanner scanner = new Scanner(System.in);
