@@ -1,4 +1,6 @@
-package src;/*
+package src;
+
+/*
 Пусть любое число – это массив его цифр слева направо.
 Пример, число 1234 – это массив [1,2,3,4].
 Дан массив целых чисел. Реализовать умножение двух чисел.
@@ -6,6 +8,8 @@ package src;/*
 Результат – число, представленное массивом.
 */
 import java.util.Scanner;
+import java.util.Arrays;
+
 public class ArrayMultiply {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
@@ -18,19 +22,40 @@ public class ArrayMultiply {
         int[] firstNumber = stringIntoArray(firstString);
         int[] secondNumber = stringIntoArray(secondString);
 
-        long firstLong = Long.parseLong(firstString);
-        long secondLong = Long.parseLong(secondString);
-        long result = firstLong * secondLong;
-
-        int[] resultArray = numberIntoArray(result);
+        // Умножаем числа, представленные как массивы
+        int[] resultArray = multiplyArrays(firstNumber, secondNumber);
 
         printArray(firstNumber);
         System.out.print(" * ");
         printArray(secondNumber);
         System.out.print(" = ");
         printArray(resultArray);
-
     }
+
+    private static int[] multiplyArrays(int[] num1, int[] num2) {
+        int len1 = num1.length;
+        int len2 = num2.length;
+        int[] result = new int[len1 + len2];
+
+        for (int i = len1 - 1; i >= 0; i--) {
+            for (int j = len2 - 1; j >= 0; j--) {
+                int product = num1[i] * num2[j];
+                int sum = product + result[i + j + 1];
+
+                result[i + j + 1] = sum % 10;
+                result[i + j] += sum / 10;      // Десятки (перенос)
+            }
+        }
+
+        // Убираем ведущие нули
+        int startIndex = 0;
+        while (startIndex < result.length - 1 && result[startIndex] == 0) {
+            startIndex++;
+        }
+
+        return Arrays.copyOfRange(result, startIndex, result.length);
+    }
+
     private static int[] stringIntoArray(String number) {
         int n = number.length();
         int[] arr = new int[n];
@@ -39,10 +64,7 @@ public class ArrayMultiply {
         }
         return arr;
     }
-    private static int[] numberIntoArray(long number) {
-        String str = String.valueOf(number);
-        return stringIntoArray(str);
-    }
+
     private static void printArray(int[] arr) {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
