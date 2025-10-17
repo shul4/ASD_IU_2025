@@ -1,34 +1,26 @@
 package src;
 
-/*
-Пусть любое число – это массив его цифр слева направо.
-Пример, число 1234 – это массив [1,2,3,4].
-Дан массив целых чисел. Реализовать умножение двух чисел.
-Пример, [1, 2, 3, 4] * [1, 1] = [1, 3, 5, 7, 4].
-Результат – число, представленное массивом.
-*/
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class ArrayMultiply {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Введите первое число: ");
-        String firstString = scanner.next();
-        System.out.print("Введите второе число: ");
-        String secondString = scanner.next();
+        System.out.println("Введите первый массив:");
+        int[] firstNumber = ArrayUtil.inputArray(scanner);
 
-        int[] firstNumber = stringIntoArray(firstString);
-        int[] secondNumber = stringIntoArray(secondString);
+        System.out.println("Введите второй массив:");
+        int[] secondNumber = ArrayUtil.inputArray(scanner);
 
         int[] resultArray = multiplyArrays(firstNumber, secondNumber);
 
-        printArray(firstNumber);
+        printArrayFormatted(firstNumber);
         System.out.print(" * ");
-        printArray(secondNumber);
+        printArrayFormatted(secondNumber);
         System.out.print(" = ");
-        printArray(resultArray);
+        printArrayFormatted(resultArray);
+
+        scanner.close();
     }
 
     private static int[] multiplyArrays(int[] num1, int[] num2) {
@@ -51,19 +43,13 @@ public class ArrayMultiply {
             startIndex++;
         }
 
-        return Arrays.copyOfRange(result, startIndex, result.length);
+        int[] finalResult = new int[result.length - startIndex];
+        System.arraycopy(result, startIndex, finalResult, 0, finalResult.length);
+
+        return finalResult;
     }
 
-    private static int[] stringIntoArray(String number) {
-        int n = number.length();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = number.charAt(i) - '0';
-        }
-        return arr;
-    }
-
-    private static void printArray(int[] arr) {
+    private static void printArrayFormatted(int[] arr) {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i]);
