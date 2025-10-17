@@ -82,8 +82,7 @@ public class CollectionsTest {
         **print()
         [zebra, apple, banana, ant, cat]
         **printReversed()
-        [
-        cat, ant, banana, apple, zebra]
+        [cat, ant, banana, apple, zebra]
         dequeue elements:
         **dequeue(): [apple, banana, ant, cat]
         **dequeue(): [banana, ant, cat]

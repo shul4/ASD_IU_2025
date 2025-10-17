@@ -3,6 +3,10 @@ package groupB;
 
 import java.util.HashMap;
 
+
+//2. Реализовать «LRU Cache» — кэш с вытеснением на основе связанного
+//списка и хеш-таблицы. Прокомментировать код.
+
 public class LRUCache<K, V> {
     //Внутренний класс для узлов двусвязного списка
     private class Node {
