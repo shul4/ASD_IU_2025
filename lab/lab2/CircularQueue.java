@@ -5,14 +5,14 @@
 
 public class CircularQueue {
     private int front; // Указатель на начало очереди.
-    private int rear; // Указатель на конец очереди.
+    private int rear; // Указатель на конец очереди (на место для следующей вставки).
     private final int[] data;
     private int size; // Число элементов в очереди.
 
     public CircularQueue(int length) {
         size = 0;
         front = 0;
-        rear = -1;
+        rear = 0;
         data = new int[length];
     }
 
@@ -20,16 +20,9 @@ public class CircularQueue {
         if (size != 0) {
             int value = data[front];
 
-            // Eсли front совпал с rear, значит в очереди остался один элемент.
-            // После удаления указатели вернутся в начальное состояние.
-            if (front == rear) {
-                front = 0;
-                rear = -1;
-            } else {
-                // Иначе мы передвигаем указатель начала вперёд.
-                // Eсли указатель ушёл за пределы очереди, он должен оказатья в её начале.
-                front = (front + 1) % data.length;
-            }
+            // Передвигаем указатель начала вперёд.
+            // Eсли указатель ушёл за пределы очереди, он должен оказатья в её начале.
+            front = (front + 1) % data.length;
             size--;
             return value;
         } else return Integer.MIN_VALUE; // если в очереди нет элементов
@@ -40,10 +33,10 @@ public class CircularQueue {
             return false;
         }
 
+        data[rear] = value; // Присваиваем значение по указателю.
         // Передвигаем указатель конца вперёд.
         // Eсли указатель окажется в конце очереди, он должен оказаться в её начале.
         rear = (rear + 1) % data.length;
-        data[rear] = value; // Присваиваем значение по указателю.
         size++; // Инкрементируем число элементов в очереди.
         return true;
     }
@@ -74,7 +67,7 @@ public class CircularQueue {
             System.out.print("[");
             for (int i = 0; i < size; i++) {
                 // Двигаемся начиная с конца очереди, для этого вычисляем индекс:
-                int index = (rear - i + data.length) % data.length; // К rear - i добавлен data.length чтобы не уйти в отрицательынй числа, так как мы идем справа налево.
+                int index = (rear - 1 - i + data.length) % data.length; // К rear - i добавлен data.length чтобы не уйти в отрицательынй числа, так как мы идем справа налево.
                 System.out.print(data[index]);
                 if (i < size - 1) System.out.print(", ");
             }
