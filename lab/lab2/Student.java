@@ -65,6 +65,7 @@ public class Student {
         Student student = (Student) object;
         return Objects.equals(id, student.id) && Objects.equals(name, student.name);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name);

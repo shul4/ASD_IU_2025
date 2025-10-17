@@ -8,10 +8,10 @@ package groupC;
 Эта структура данных гарантирует логарифмическую сложность операций поиска, вставки и удаления — O(log n) в худшем случае.*/
 
 /*4 основных правила для балансировки:
-* 1)Каждый узел имеет цвет - красный или чёрный
-* 2)Корень и листья(NIL узлы) - всегда чёрные
-* 3)Не может быть двух красных узлов подряд
-* 4)Все пути от любого узла до листа содержат одинаковое количество чёрных узлов - Чёрная высота (Без учёта корня)*/
+ * 1)Каждый узел имеет цвет - красный или чёрный
+ * 2)Корень и листья(NIL узлы) - всегда чёрные
+ * 3)Не может быть двух красных узлов подряд
+ * 4)Все пути от любого узла до листа содержат одинаковое количество чёрных узлов - Чёрная высота (Без учёта корня)*/
 public class RedBlackTree<T extends Comparable<T>> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -32,12 +32,13 @@ public class RedBlackTree<T extends Comparable<T>> {
             this.parent = nil;
         }
     }
-    private Node root;
-    private Node nil;   // nil-узел (представляет NULL)
 
-     //Конструктор красно-черного дерева.
-     //Инициализирует nil-узел и корень
-     public RedBlackTree() {
+    private Node root;
+    private Node nil;   //nil-узел (представляет NULL)
+
+    //Конструктор красно-черного дерева.
+    //Инициализирует nil-узел и корень
+    public RedBlackTree() {
         // Создаем NIL-узел (черный лист)
         nil = new Node(null);
         nil.color = BLACK;
@@ -93,8 +94,8 @@ public class RedBlackTree<T extends Comparable<T>> {
         fixColorsInsert(newNode);
     }
 
-     //Восстановление свойств красно-черного дерева после вставки.
-     //Обрабатывает случаи нарушения правила о двух красных узлах
+    //Восстановление свойств красно-черного дерева после вставки.
+    //Обрабатывает случаи нарушения правила о двух красных узлах
     private void fixColorsInsert(Node node) {
         //Пока родитель узла красный (нарушение свойства 3)
         while (node.parent.color == RED) {
@@ -377,8 +378,8 @@ minimum(node.right)  ...
         node.color = BLACK;
     }
 
-     //Замена одного поддерева другим.
-     //Используется при удалении узла
+    //Замена одного поддерева другим.
+    //Используется при удалении узла
     private void transplant(Node nodeToReplace, Node replacement) {
         if (nodeToReplace.parent == nil) {
             root = replacement;     //Замена корня
