@@ -79,5 +79,6 @@ public class BinarySearch {
         } else {
             return binarySearchRecursive(arr, target, left, middle - 1);
         }
+
     }
 }
