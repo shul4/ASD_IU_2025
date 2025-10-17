@@ -22,7 +22,6 @@ public class ArrayMultiply {
         int[] firstNumber = stringIntoArray(firstString);
         int[] secondNumber = stringIntoArray(secondString);
 
-        // Умножаем числа, представленные как массивы
         int[] resultArray = multiplyArrays(firstNumber, secondNumber);
 
         printArray(firstNumber);
@@ -43,11 +42,10 @@ public class ArrayMultiply {
                 int sum = product + result[i + j + 1];
 
                 result[i + j + 1] = sum % 10;
-                result[i + j] += sum / 10;      // Десятки (перенос)
+                result[i + j] += sum / 10;
             }
         }
 
-        // Убираем ведущие нули
         int startIndex = 0;
         while (startIndex < result.length - 1 && result[startIndex] == 0) {
             startIndex++;
