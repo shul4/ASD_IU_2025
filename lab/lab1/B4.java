@@ -21,9 +21,9 @@ public class B4 {
      */
 
     public static void main(String[] args) {
-        int[] binaryArray = binarysearch.readArray();
+        int[] binaryArray = Binarysearch.readArray();
         System.out.println();
-        int divider = binarysearch.readIntSafe("Введите делитель: ", false);
+        int divider = Binarysearch.readIntSafe("Введите делитель: ", false);
         System.out.println(writeBooleanArray(divides(toDecimal(binaryArray), divider)));
     }
 

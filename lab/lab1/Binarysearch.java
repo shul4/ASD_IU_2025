@@ -2,7 +2,7 @@ package lab1;
 
 import java.util.Scanner;
 
-public class binarysearch {
+public class Binarysearch {
 
 
      // Реализовать алгоритм бинарного поиска двумя способами.
