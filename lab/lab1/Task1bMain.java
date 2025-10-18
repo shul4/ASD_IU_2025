@@ -10,6 +10,14 @@ import java.util.Scanner;
 */
 
 public class Task1bMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] array = inputArray(scanner);
+        int result = findNumberByFrequency(array);
+        System.out.println("Результат: " + result);
+        scanner.close();
+    }
+
     public static int findNumberByFrequency(int[] array) {
         int result = -1;
         for (int i = 0; i < array.length; i++) {
@@ -40,11 +48,5 @@ public class Task1bMain {
         return array;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] array = inputArray(scanner);
-        int result = findNumberByFrequency(array);
-        System.out.println("Результат: " + result);
-        scanner.close();
-    }
+
 }

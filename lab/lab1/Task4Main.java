@@ -9,7 +9,17 @@ import java.util.Scanner;
 */
 
 public class Task4Main {
-    public static int[] findFirstPrimes(int n) {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите количество простых чисел (N): ");
+        int n = scanner.nextInt();
+        int[] primes = findFirstPrimes(n);
+        System.out.println("Первые " + n + " простых чисел:");
+        printArray(primes);
+        scanner.close();
+    }
+
+    private static int[] findFirstPrimes(int n) {
         if (n <= 0) {
             return new int[0];
         }
@@ -43,20 +53,10 @@ public class Task4Main {
         return (int) (n * (Math.log(n) + Math.log(Math.log(n)))) + 10;
     }
 
-    public static void printArray(int[] array) {
+    private static void printArray(int[] array) {
         for (int value : array) {
             System.out.print(value + " ");
         }
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите количество простых чисел (N): ");
-        int n = scanner.nextInt();
-        int[] primes = findFirstPrimes(n);
-        System.out.println("Первые " + n + " простых чисел:");
-        printArray(primes);
-        scanner.close();
     }
 }

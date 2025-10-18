@@ -5,34 +5,25 @@ import java.util.Scanner;
 //Реализовать алгоритм бинарного поиска двумя способами.
 
 public class TaskMain {
-    public static int binarySearchIterative(int[] array, int key) {
-        int left = 0;
-        int right = array.length - 1;
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            if (array[mid] == key) {
-                return mid;
-            } else if (array[mid] < key) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return -1;
-    }
-
-    public static int binarySearchRecursive(int[] array, int left, int right, int key) {
-        if (left > right) {
-            return -1;
-        }
-        int mid = (left + right) / 2;
-        if (array[mid] == key) {
-            return mid;
-        } else if (array[mid] < key) {
-            return binarySearchRecursive(array, mid + 1, right, key);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] array = inputArray(scanner);
+        printArray(array);
+        System.out.print("Введите число для поиска: ");
+        int key = scanner.nextInt();
+        int resultIterative = binarySearchIterative(array, key);
+        if (resultIterative != -1) {
+            System.out.println("Итеративный поиск: элемент найден, позиция: " + resultIterative);
         } else {
-            return binarySearchRecursive(array, left, mid - 1, key);
+            System.out.println("Итеративный поиск: элемент не найден");
         }
+        int resultRecursive = binarySearchRecursive(array, 0, array.length - 1, key);
+        if (resultRecursive != -1) {
+            System.out.println("Рекурсивный поиск: элемент найден, позиция: " + resultRecursive);
+        } else {
+            System.out.println("Рекурсивный поиск: элемент не найден");
+        }
+        scanner.close();
     }
 
     public static int[] inputArray(Scanner scanner) {
@@ -54,25 +45,33 @@ public class TaskMain {
         System.out.println();
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] array = inputArray(scanner);
-        printArray(array);
-        System.out.print("Введите число для поиска: ");
-        int key = scanner.nextInt();
-        int resultIterative = binarySearchIterative(array, key);
-        if (resultIterative != -1) {
-            System.out.println("Итеративный поиск: элемент найден, позиция: " + resultIterative);
-        } else {
-            System.out.println("Итеративный поиск: элемент не найден");
+    private static int binarySearchIterative(int[] array, int key) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (array[mid] == key) {
+                return mid;
+            } else if (array[mid] < key) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
-        int resultRecursive = binarySearchRecursive(array, 0, array.length - 1, key);
-        if (resultRecursive != -1) {
-            System.out.println("Рекурсивный поиск: элемент найден, позиция: " + resultRecursive);
-        } else {
-            System.out.println("Рекурсивный поиск: элемент не найден");
+        return -1;
+    }
+
+    private static int binarySearchRecursive(int[] array, int left, int right, int key) {
+        if (left > right) {
+            return -1;
         }
-        scanner.close();
+        int mid = (left + right) / 2;
+        if (array[mid] == key) {
+            return mid;
+        } else if (array[mid] < key) {
+            return binarySearchRecursive(array, mid + 1, right, key);
+        } else {
+            return binarySearchRecursive(array, left, mid - 1, key);
+        }
     }
 }
-

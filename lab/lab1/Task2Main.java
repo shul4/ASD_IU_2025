@@ -10,6 +10,15 @@ import java.util.Scanner;
 */
 
 public class Task2Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите римское число (например, XIV): ");
+        String roman = scanner.nextLine().toUpperCase();
+        int arabic = romanToArabic(roman);
+        System.out.println("Арабское число: " + arabic);
+        scanner.close();
+    }
+
     public static int romanToArabic(String roman) {
         Map<Character, Integer> romanValues = new HashMap<>();
         romanValues.put('I', 1);
@@ -36,12 +45,4 @@ public class Task2Main {
         return result;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите римское число (например, XIV): ");
-        String roman = scanner.nextLine().toUpperCase();
-        int arabic = romanToArabic(roman);
-        System.out.println("Арабское число: " + arabic);
-        scanner.close();
-    }
 }

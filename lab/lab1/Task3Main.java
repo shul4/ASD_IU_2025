@@ -11,22 +11,6 @@ import java.util.Scanner;
 */
 
 public class Task3Main {
-    public static boolean isIsogram(String word) {
-        word = word.toLowerCase();
-        for (int i = 0; i < word.length(); i++) {
-            char currentChar = word.charAt(i);
-            if (!Character.isLetter(currentChar)) {
-                continue;
-            }
-            for (int j = i + 1; j < word.length(); j++) {
-                if (currentChar == word.charAt(j)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите слово: ");
@@ -38,5 +22,18 @@ public class Task3Main {
             System.out.println("Строка не является изограммой.");
         }
         scanner.close();
+    }
+
+    private static boolean isIsogram(String word) {
+        word = word.toLowerCase();
+        for (int i = 0; i < word.length(); i++) {
+            char currentChar = word.charAt(i);
+            for (int j = i + 1; j < word.length(); j++) {
+                if (currentChar == word.charAt(j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

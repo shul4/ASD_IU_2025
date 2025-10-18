@@ -11,7 +11,18 @@ import java.util.Scanner;
 */
 
 public class Task1Main {
-    public static String convertToBase(int n, int m) {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите число N (в десятичной системе): ");
+        int n = scanner.nextInt();
+        System.out.print("Введите основание системы M (от 2 до 9): ");
+        int m = scanner.nextInt();
+        String converted = convertToBase(n, m);
+        System.out.println("Результат: " + converted);
+        scanner.close();
+    }
+
+    private static String convertToBase(int n, int m) {
         if (m < 2 || m > 9) {
             return "Ошибка.";
         }
@@ -29,16 +40,5 @@ public class Task1Main {
             result.insert(0, "-");
         }
         return result.toString();
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите число N (в десятичной системе): ");
-        int n = scanner.nextInt();
-        System.out.print("Введите основание системы M (от 2 до 9): ");
-        int m = scanner.nextInt();
-        String converted = convertToBase(n, m);
-        System.out.println("Результат: " + converted);
-        scanner.close();
     }
 }
