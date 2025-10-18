@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- Дан целочисленный массив. Верните число, частота встречи которого в
- массиве равна его значению. Если таких чисел нет, вернуть «-1». Если
- таких чисел несколько, вернуть наибольшее.5
+ * Дан целочисленный массив. Верните число, частота встречи которого в
+ * массиве равна его значению. Если таких чисел нет, вернуть «-1». Если
+ * таких чисел несколько, вернуть наибольшее.
  */
 public class FrequencyValueFinder {
 
@@ -18,9 +18,11 @@ public class FrequencyValueFinder {
     public static void main(String[] args) {
         try {
             int[] array = readArrayFromUser();
-            printArray("Введенный массив:", array);
 
-            int result = findNumberWithEqualFrequencyAndValue(array);
+            ArrayProcessor arrayProcessor = new ArrayProcessor();
+            arrayProcessor.printArray("Введенный массив:", array);
+
+            int result = arrayProcessor.findNumberWithEqualFrequencyAndValue(array);
             printResult(result);
 
         } catch (IOException e) {
@@ -53,11 +55,33 @@ public class FrequencyValueFinder {
     }
 
     /**
+     * Метод для вывода результата
+     * @param result результат поиска
+     */
+    private static void printResult(int result) {
+        if (result == -1) {
+            System.out.println("Чисел, у которых значение равно частоте, не найдено");
+        } else {
+            System.out.println("Найдено число: " + result);
+        }
+    }
+}
+
+/**
+ * Класс для обработки массивов
+ */
+class ArrayProcessor {
+
+    /**
      * Метод для поиска числа с равной частотой и значением
      * @param array исходный массив
      * @return найденное число или -1 если не найдено
      */
-    private static int findNumberWithEqualFrequencyAndValue(int[] array) {
+    public int findNumberWithEqualFrequencyAndValue(int[] array) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+
         int maxValue = findMaxValueInArray(array);
         int[] frequencyArray = createFrequencyArray(array, maxValue);
 
@@ -69,7 +93,7 @@ public class FrequencyValueFinder {
      * @param array массив чисел
      * @return максимальное значение
      */
-    private static int findMaxValueInArray(int[] array) {
+    public int findMaxValueInArray(int[] array) {
         int maxValue = array[0];
         for (int i = 1; i < array.length; i++) {
             if (array[i] > maxValue) {
@@ -85,7 +109,7 @@ public class FrequencyValueFinder {
      * @param maxValue максимальное значение
      * @return массив частот
      */
-    private static int[] createFrequencyArray(int[] array, int maxValue) {
+    public int[] createFrequencyArray(int[] array, int maxValue) {
         int[] frequencyArray = new int[maxValue + 1];
 
         for (int number : array) {
@@ -102,7 +126,7 @@ public class FrequencyValueFinder {
      * @param frequencyArray массив частот
      * @return найденное число или -1
      */
-    private static int findMaxValidNumber(int[] frequencyArray) {
+    public int findMaxValidNumber(int[] frequencyArray) {
         int maxValidNumber = -1;
 
         for (int i = 0; i < frequencyArray.length; i++) {
@@ -112,7 +136,6 @@ public class FrequencyValueFinder {
                 }
             }
         }
-
         return maxValidNumber;
     }
 
@@ -121,22 +144,10 @@ public class FrequencyValueFinder {
      * @param message сообщение перед выводом
      * @param array массив для вывода
      */
-    private static void printArray(String message, int[] array) {
+    public void printArray(String message, int[] array) {
         System.out.println(message);
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + (i < array.length - 1 ? " " : "\n"));
-        }
-    }
-
-    /**
-     * Метод для вывода результата
-     * @param result результат поиска
-     */
-    private static void printResult(int result) {
-        if (result == -1) {
-            System.out.println("Чисел, у которых значение равно частоте, не найдено");
-        } else {
-            System.out.println("Найдено число: " + result);
         }
     }
 }

@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
  */
 public class PrimeNumbersFinder {
 
-    private static final int UPPER_BOUND_MULTIPLIER = 20;
-
     /**
      * Основной метод класса
      * @param args аргументы командной строки
@@ -20,7 +18,7 @@ public class PrimeNumbersFinder {
         try {
             int numberCount = readNumberCountFromUser();
             int[] primeNumbers = findFirstNPrimeNumbers(numberCount);
-            printPrimeNumbers("Первые " + numberCount + " простых чисел:", primeNumbers);
+            ArrayPrinter.printArray("Первые " + numberCount + " простых чисел:", primeNumbers);
 
         } catch (IOException e) {
             System.out.println("Ошибка ввода-вывода: " + e.getMessage());
@@ -66,12 +64,37 @@ public class PrimeNumbersFinder {
     }
 
     /**
-     * Метод для оценки верхней границы поиска
+     * Метод для оценки верхней границы поиска с использованием формулы
+     * Формула: upperBound ≈ n * (ln(n) + ln(ln(n))) для n > 6
      * @param numberCount количество простых чисел
      * @return верхняя граница поиска
      */
     private static int estimateUpperBound(int numberCount) {
-        return numberCount * UPPER_BOUND_MULTIPLIER;
+        if (numberCount <= 0) {
+            throw new IllegalArgumentException("Количество должно быть положительным числом");
+        }
+
+        // Для малых значений используем фиксированные границы
+        if (numberCount <= 6) {
+            switch (numberCount) {
+                case 1: return 2;
+                case 2: return 3;
+                case 3: return 5;
+                case 4: return 7;
+                case 5: return 11;
+                case 6: return 13;
+            }
+        }
+
+        // Для больших значений используем формулу n * (ln(n) + ln(ln(n)))
+        double n = numberCount;
+        double upperBoundEstimate = n * (Math.log(n) + Math.log(Math.log(n)));
+
+        // Добавляем запас 20% для гарантии
+        int upperBound = (int) Math.ceil(upperBoundEstimate * 1.2);
+
+        // Гарантируем, что верхняя граница не меньше минимального значения
+        return Math.max(upperBound, 20);
     }
 
     /**
@@ -96,7 +119,6 @@ public class PrimeNumbersFinder {
 
         return isPrime;
     }
-
     /**
      * Метод для извлечения первых N простых чисел
      * @param isPrime массив отметок простых чисел
@@ -116,18 +138,63 @@ public class PrimeNumbersFinder {
             currentNumber++;
         }
 
+        // Если не нашли достаточно простых чисел, повторяем с большей верхней границей
+        if (count < numberCount) {
+            int newUpperBound = isPrime.length * 2;
+            boolean[] newIsPrime = applySieveOfEratosthenes(newUpperBound);
+            return extractFirstNPrimeNumbers(newIsPrime, numberCount);
+        }
+
         return primeNumbers;
+    }
+}
+
+/**
+ * Класс для вывода массивов в консоль
+ */
+class ArrayPrinter {
+
+    /**
+     * Метод для вывода массива в консоль
+     * @param message сообщение перед выводом
+     * @param array массив для вывода
+     */
+    public static void printArray(String message, int[] array) {
+        System.out.println(message);
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + (i < array.length - 1 ? " " : "\n"));
+        }
     }
 
     /**
-     * Метод для вывода простых чисел в консоль
+     * Перегруженный метод для вывода массива с форматированием
      * @param message сообщение перед выводом
-     * @param primeNumbers массив простых чисел
+     * @param array массив для вывода
+     * @param elementsPerLine количество элементов в строке
      */
-    private static void printPrimeNumbers(String message, int[] primeNumbers) {
+    public static void printArray(String message, int[] array, int elementsPerLine) {
         System.out.println(message);
-        for (int i = 0; i < primeNumbers.length; i++) {
-            System.out.print(primeNumbers[i] + (i < primeNumbers.length - 1 ? " " : "\n"));
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%6d", array[i]);
+            if ((i + 1) % elementsPerLine == 0 || i == array.length - 1) {
+                System.out.println();
+            }
+        }
+    }
+
+    /**
+     * Метод для вывода массива boolean в консоль
+     * @param message сообщение перед выводом
+     * @param array массив для вывода
+     * @param elementsPerLine количество элементов в строке
+     */
+    public static void printArray(String message, boolean[] array, int elementsPerLine) {
+        System.out.println(message);
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%6s", array[i] ? "T" : "F");
+            if ((i + 1) % elementsPerLine == 0 || i == array.length - 1) {
+                System.out.println();
+            }
         }
     }
 }
