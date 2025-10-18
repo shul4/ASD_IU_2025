@@ -20,14 +20,14 @@ public class BinarySearch {
         if (iterativeResult == -1) {
             System.out.println("Итеративный поиск: элемент не найден.");
         } else {
-            System.out.println("Итеративный поиск: элемент находится на позиции " + (iterativeResult + 1));
+            System.out.println("Итеративный поиск: элемент находится на позиции " + (iterativeResult));
         }
 
         int recursiveResult = binarySearchRecursive(array, target, 0, array.length - 1);
         if (recursiveResult == -1) {
             System.out.println("Рекурсивный поиск: элемент не найден.");
         } else {
-            System.out.println("Рекурсивный поиск: элемент находится на позиции " + (recursiveResult + 1));
+            System.out.println("Рекурсивный поиск: элемент находится на позиции " + (recursiveResult));
         }
 
         scanner.close();
