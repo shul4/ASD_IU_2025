@@ -4,7 +4,7 @@ import java.util.Scanner;
 //Дан массив целых чисел. Реализовать умножение двух чисел.
 //Пример, [1, 2, 3, 4] * [1, 1] = [1, 3, 5, 7, 4].
 //Результат – число, представленное массивом.
-public class Task0 {
+public classm ArrayMultiplication {
 
     public static int[] multiplyArrays(int[] num1, int[] num2) {
         int n1 = num1.length;
